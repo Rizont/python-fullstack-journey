@@ -11,8 +11,8 @@
 
 ### Функции
 #### Работа с файлом
-`load_expense(path: str) -> list[Expense]` - Читает JSON-файл; при его отсутсвии возращает []
-`save_expense(path: str | None, items: list[Expense]) -> None` - атомарно пишет JSON (temp + rename).   
+`load_expense(path: Path) -> list[Expense]` - Читает JSON-файл; при его отсутсвии возращает []
+`save_expense(path: Path | None, items: list[Expense]) -> None` - сохраняет JSON.   
 
 #### Чистые функции
 ### Чистые (без I/O)
