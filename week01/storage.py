@@ -3,6 +3,7 @@ from pathlib import Path
 from typing import TypedDict, Optional
 
 class Expense(TypedDict):
+    id: int # индевикатор
     date: str # дата
     category: str # категория товара
     amount: int # копейки
@@ -23,12 +24,13 @@ def load_expense(path: Path) -> list[Expense]:
     return raw
 
 def save_expense(path: Path, items: list[Expense]) -> None:
-    "Cохраняет JSON"
-    path.parent.mkdir(parents=True, exist_ok=True)
-    tmp = path.write_text(
+    "Cохраняет JSON, но перед этим создается временный файл на всякий случай"
+    tmp = path.with_suffix(suffix=".tmp") 
+    tmp.write_text(
         json.dumps(items,
                    ensure_ascii=False, 
                    indent=4,
                    encoding = "UTF-8"
                    )
     )
+    tmp.replace(path)
